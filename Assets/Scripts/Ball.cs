@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    
+    /* -------------------------------- Variables ------------------------------- */
     public Material yellowBallMaterial;
     public Material redBallMaterial;
 
@@ -12,22 +14,25 @@ public class Ball : MonoBehaviour
     public AudioSource audioSrc;
     public AudioClip bounceSfx;
 
-    int lives = 4;
+    private bool isDestroyed = false;
+    private int lives = 4;
 
+
+    /* --------------------------------- Methods -------------------------------- */
     void OnMouseOver() {
-        // Increment the balls destroyed counter
-        Spawner.BALLS_DESTROYED++;
+        if (!isDestroyed) {
 
-        // Debug the number of destroyed balls in the console
-        Debug.Log($"Balls Destroyed: {Spawner.BALLS_DESTROYED}");
+            // Destory ball
+            DestroyBall();
 
-        // Destroy the object this script is attached to
-        Destroy(gameObject);
+            if (Spawner.GAME_STATUS) {
+                // Increment the balls destroyed counter
+                Spawner.BALLS_DESTROYED++;
 
-        // Explosion particles
-        if (lives > 2) { PlayParticleAndDestroy(ballExplosion); }
-        else if (lives == 2) { PlayParticleAndDestroy(yellowBallExplosion); }
-        else if (lives == 1) { PlayParticleAndDestroy(redBallExplosion); }
+                // Debug the number of destroyed balls in the console
+                Debug.Log($"Balls Destroyed: {Spawner.BALLS_DESTROYED}");
+            }   
+        }
     }
 
     void OnCollisionEnter(Collision collision) {
@@ -35,8 +40,8 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.tag == "Floor") {
             
             // Bounce sound effect
-            audioSrc.clip = bounceSfx;
-            audioSrc.Play();
+            //audioSrc.clip = bounceSfx;
+            //audioSrc.Play();
 
             // Decrement lives
             lives--;
@@ -52,6 +57,7 @@ public class Ball : MonoBehaviour
             }
             else if (lives <= 0) {
                 Spawner.GAME_STATUS = false;
+                Debug.Log("Game ending ball hit the floor!");
             }
         }
     }
@@ -70,8 +76,7 @@ public class Ball : MonoBehaviour
         }
     }
 
-    void PlayParticleAndDestroy(GameObject explosionPrefab)
-    {
+    void PlayParticleAndDestroy(GameObject explosionPrefab) {
         if (explosionPrefab != null)
         {
             // Instantiate the particle system
@@ -87,4 +92,17 @@ public class Ball : MonoBehaviour
             Destroy(explosionParticle, particleDuration);
         }
     }
+
+    void DestroyBall() {
+        isDestroyed = true;
+
+        // Destroy the object this script is attached to
+        Destroy(gameObject);
+
+        // Explosion particles
+        if (lives > 2) { PlayParticleAndDestroy(ballExplosion); }
+        else if (lives == 2) { PlayParticleAndDestroy(yellowBallExplosion); }
+        else if (lives <= 1) { PlayParticleAndDestroy(redBallExplosion); }
+    }
+
 }
