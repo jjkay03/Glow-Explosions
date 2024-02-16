@@ -4,6 +4,14 @@ public class Ball : MonoBehaviour
 {
     public Material yellowBallMaterial;
     public Material redBallMaterial;
+
+    public GameObject ballExplosion;
+    public GameObject yellowBallExplosion;
+    public GameObject redBallExplosion;
+
+    public AudioSource audioSrc;
+    public AudioClip bounceSfx;
+
     int lives = 4;
 
     void OnMouseOver() {
@@ -15,15 +23,24 @@ public class Ball : MonoBehaviour
 
         // Destroy the object this script is attached to
         Destroy(gameObject);
+
+        // Explosion particles
+        if (lives > 2) { PlayParticleAndDestroy(ballExplosion); }
+        else if (lives == 2) { PlayParticleAndDestroy(yellowBallExplosion); }
+        else if (lives == 1) { PlayParticleAndDestroy(redBallExplosion); }
     }
 
     void OnCollisionEnter(Collision collision) {
         // Check if ball collides with floor
         if (collision.gameObject.tag == "Floor") {
             
+            // Bounce sound effect
+            audioSrc.clip = bounceSfx;
+            audioSrc.Play();
+
             // Decrement lives
             lives--;
-
+            
             // Deal with lives change
             if (lives == 2) {
                 // Change to yellow material
@@ -50,6 +67,24 @@ public class Ball : MonoBehaviour
         else {
             // Log a warning if no MeshRenderer component is found
             Debug.LogWarning("MeshRenderer component not found on the object.");
+        }
+    }
+
+    void PlayParticleAndDestroy(GameObject explosionPrefab)
+    {
+        if (explosionPrefab != null)
+        {
+            // Instantiate the particle system
+            GameObject explosionParticle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+            // Get the particle system component
+            ParticleSystem particleSystem = explosionParticle.GetComponent<ParticleSystem>();
+
+            // Get the duration of the particle system
+            float particleDuration = particleSystem.main.duration;
+
+            // Destroy the particle object after the duration of the particle system
+            Destroy(explosionParticle, particleDuration);
         }
     }
 }

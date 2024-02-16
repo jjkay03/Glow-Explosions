@@ -148,3 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yellowBallMaterial: {fileID: 2100000, guid: e375e87784005f64da7904041b5b2bea, type: 2}
   redBallMaterial: {fileID: 2100000, guid: 3e5da55c018e4284c8fc42e8c9847357, type: 2}
+  ballExplosion: {fileID: 4905430489568328316, guid: e8a94a9c41b229a4c8b7e6183014dc47, type: 3}
+  yellowBallExplosion: {fileID: 4905430489568328316, guid: fa2424879e02f434a90e5cda4a954ac0, type: 3}
+  redBallExplosion: {fileID: 4905430489568328316, guid: 640f98ce23e80dc4e954afa4451aa477, type: 3}
+  audioSrc: {fileID: 6097174563006554829, guid: 2a086dae11d885848b51b5327507036b, type: 3}
+  bounceSfx: {fileID: 8300000, guid: ab0e0b1cfd1dd254b8125523d0c4b940, type: 3}
