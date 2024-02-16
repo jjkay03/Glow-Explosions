@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class Ball : MonoBehaviour
-{
+public class Ball : MonoBehaviour {
     
     /* -------------------------------- Variables ------------------------------- */
-    public Material yellowBallMaterial;
-    public Material redBallMaterial;
-
     public GameObject ballExplosion;
     public GameObject yellowBallExplosion;
     public GameObject redBallExplosion;
+
+    public Material yellowBallMaterial;
+    public Material redBallMaterial;
 
     public AudioSource audioSrc;
     public AudioClip bounceSfx;
@@ -25,12 +24,12 @@ public class Ball : MonoBehaviour
             // Destory ball
             DestroyBall();
 
-            if (Spawner.GAME_STATUS) {
+            if (GameManager.GAME_STATUS) {
                 // Increment the balls destroyed counter
-                Spawner.BALLS_DESTROYED++;
+                GameManager.BALLS_DESTROYED++;
 
                 // Debug the number of destroyed balls in the console
-                Debug.Log($"Balls Destroyed: {Spawner.BALLS_DESTROYED}");
+                Debug.Log($"Balls Destroyed: {GameManager.BALLS_DESTROYED}");
             }   
         }
     }
@@ -56,7 +55,7 @@ public class Ball : MonoBehaviour
                 ChangeMaterial(redBallMaterial);
             }
             else if (lives <= 0) {
-                Spawner.GAME_STATUS = false;
+                GameManager.GAME_STATUS = false;
                 Debug.Log("Game ending ball hit the floor!");
             }
         }
@@ -93,7 +92,7 @@ public class Ball : MonoBehaviour
         }
     }
 
-    void DestroyBall() {
+    public void DestroyBall() {
         isDestroyed = true;
 
         // Destroy the object this script is attached to

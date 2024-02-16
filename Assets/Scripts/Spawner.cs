@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
     
     /* -------------------------------- Variables ------------------------------- */
-    public static bool GAME_STATUS = true;
-    public static int BALLS_DESTROYED = 0;
-    
     public GameObject ballPrefab;
     
     public bool spawnBalls = true;
@@ -23,7 +18,7 @@ public class Spawner : MonoBehaviour {
     }
     
     void SpawnBall() {
-        if (GAME_STATUS) {
+        if (GameManager.GAME_STATUS) {
             // Choose a random position on the spawner
             Vector3 randomPosition = new Vector3(
                 Random.Range(transform.position.x - transform.localScale.x / 2f, transform.position.x + transform.localScale.x / 2f),
