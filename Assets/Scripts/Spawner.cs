@@ -33,8 +33,8 @@ public class Spawner : MonoBehaviour {
             CancelInvoke("SpawnBall");
 
             // Decrease the spawn interval over time
-            if (Random.Range(0, 10) == 0 && spawnInterval > 0.5f) {
-                    spawnInterval *= 0.9f;
+            if (Random.Range(0, 10) == 0 && spawnInterval > 1f) {
+                    spawnInterval *= 0.95f;
                     Debug.Log($"Spawn interval changed: {spawnInterval}");
             }  
 
