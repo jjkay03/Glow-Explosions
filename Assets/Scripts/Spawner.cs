@@ -6,8 +6,8 @@ public class Spawner : MonoBehaviour {
     public GameObject ballPrefab;
     
     public bool spawnBalls = true;
-    private float spawnInterval = 2f;
-    private int multipleBallAttackCooldown = 10;
+    public static float spawnInterval = 2f;
+    public static int multipleBallAttackCooldown = 10;
 
     /* --------------------------------- Methods -------------------------------- */
     void Start() {

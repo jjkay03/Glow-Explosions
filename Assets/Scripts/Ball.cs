@@ -24,8 +24,7 @@ public class Ball : MonoBehaviour {
         if (collision.gameObject.tag == "Floor") {
             
             // Bounce sound effect
-            //audioSrc.clip = bounceSfx;
-            //audioSrc.Play();
+            //audioSrc.PlayOneShot(bounceSfx);
 
             // Decrement lives
             lives--;

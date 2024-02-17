@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour {
         GAME_STATUS = true;
         SCORE = 0;
         gameEnded = false;
+        Spawner.spawnInterval = 2f;
+        Spawner.multipleBallAttackCooldown = 10;
 
         // Change camera background to light blue
         mainCamera.backgroundColor = startingBgColor;
