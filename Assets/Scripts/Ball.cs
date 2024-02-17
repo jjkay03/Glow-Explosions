@@ -1,4 +1,3 @@
-using UnityEditor.UI;
 using UnityEngine;
 
 public class Ball : MonoBehaviour {
