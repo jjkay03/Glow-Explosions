@@ -43,11 +43,10 @@ public class GameManager : MonoBehaviour {
         // Reset score and game status
         GAME_STATUS = true;
         SCORE = 0;
+        gameEnded = false;
 
         // Change camera background to light blue
         mainCamera.backgroundColor = startingBgColor;
-
-        
     }
 
     void EndGame(){
@@ -62,7 +61,6 @@ public class GameManager : MonoBehaviour {
             Ball ballScript = ball.GetComponent<Ball>();
             if (ballScript != null) {
                 ballScript.DestroyBall();
-                
             }
         }
     }
