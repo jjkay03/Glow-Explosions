@@ -5,18 +5,20 @@ public class GameManager : MonoBehaviour {
     
     /* -------------------------------- Variables ------------------------------- */
     public Camera mainCamera;
+    [SerializeField] TextMeshProUGUI titleText;
     [SerializeField] TextMeshProUGUI scoreText;
-
-    public static bool GAME_STATUS = true;
+    
+    public static bool GAME_STATUS = false;
     public static int SCORE = 0;
 
     Color startingBgColor = new Color(0xBB / 255.0f, 0xFF / 255.0f, 0xED / 255.0f, 1.0f);
+    bool titleScreen = true;
     bool gameEnded = false;
 
     /* --------------------------------- Methods -------------------------------- */
     // Game start
     void Start() {
-        ResetGame();
+        //ResetGame();
     }
     
     // Update while game is running
@@ -24,16 +26,30 @@ public class GameManager : MonoBehaviour {
         // Update score
         scoreText.text = SCORE.ToString();
 
+        if (titleScreen && Input.GetMouseButtonDown(0)) {
+            ResetGame();
+            FirstStartGame();  
+        }
+
         // Check for end-game conditions
-        if (!GAME_STATUS && !gameEnded) {
+        if (!GAME_STATUS && !gameEnded && !titleScreen) {
             gameEnded = true;
             EndGame();
         }
 
         // Check for game restart
         if (!GAME_STATUS && Input.GetMouseButtonDown(0)) {
-            Debug.Log("GAME RESTART");
             ResetGame();
+        }
+    }
+
+    void FirstStartGame() {
+        titleText.enabled = false;
+        scoreText.enabled = true;
+        titleScreen = false;
+        Spawner[] spawners = FindObjectsOfType<Spawner>();
+        foreach (Spawner spawner in spawners) {
+            spawner.StartSpawner();
         }
     }
 

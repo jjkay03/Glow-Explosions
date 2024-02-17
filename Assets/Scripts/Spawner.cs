@@ -5,18 +5,18 @@ public class Spawner : MonoBehaviour {
     /* -------------------------------- Variables ------------------------------- */
     public GameObject ballPrefab;
     
-    public bool spawnBalls = true;
     public static float spawnInterval = 2f;
     public static int multipleBallAttackCooldown = 10;
 
     /* --------------------------------- Methods -------------------------------- */
     void Start() {
-        if (spawnBalls) {
-            // Spawn the first ball
-            ConstentSpawnBall();
-        }   
+        ConstentSpawnBall();
     }
     
+    public void StartSpawner() {
+        ConstentSpawnBall();
+    }
+
     void ConstentSpawnBall() {
         if (GameManager.GAME_STATUS) {
             

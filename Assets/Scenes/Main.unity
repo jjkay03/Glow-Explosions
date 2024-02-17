@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &204476147 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6967870890999832, guid: aebe8d548673a5a4b8159eb9cb6fe162, type: 3}
+  m_PrefabInstance: {fileID: 1113891115533668074}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &674967644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,6 +150,10 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1524683312}
+    - target: {fileID: 2737641681741133550, guid: 62768cc0e06278c4bad6f8d65191fa1b, type: 3}
+      propertyPath: titleText
+      value: 
+      objectReference: {fileID: 204476147}
     - target: {fileID: 2737641681741133550, guid: 62768cc0e06278c4bad6f8d65191fa1b, type: 3}
       propertyPath: mainCamera
       value: 
@@ -333,7 +348,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1113891115533668074}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -346,6 +361,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6967870890999832, guid: aebe8d548673a5a4b8159eb9cb6fe162, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967870890999832, guid: aebe8d548673a5a4b8159eb9cb6fe162, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6967870890999832, guid: aebe8d548673a5a4b8159eb9cb6fe162, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2547466797000075390, guid: aebe8d548673a5a4b8159eb9cb6fe162, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2547466797000075390, guid: aebe8d548673a5a4b8159eb9cb6fe162, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4387405057866778255, guid: aebe8d548673a5a4b8159eb9cb6fe162, type: 3}
       propertyPath: m_LocalPosition.x
       value: 639.50006
