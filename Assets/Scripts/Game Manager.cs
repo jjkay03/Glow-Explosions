@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour {
     public static bool GAME_STATUS = true;
     public static int BALLS_DESTROYED = 0;
 
-    
+    bool gameEnded = false;
+
     /* --------------------------------- Methods -------------------------------- */
     void Update() {
         // Check for end-game conditions
-        if (!GAME_STATUS) {
+        if (!GAME_STATUS && !gameEnded) {
+            gameEnded = true;
             EndGame();
         }
     }
