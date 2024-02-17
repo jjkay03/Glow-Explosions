@@ -1,3 +1,4 @@
+using UnityEditor.UI;
 using UnityEngine;
 
 public class Ball : MonoBehaviour {
@@ -13,30 +14,12 @@ public class Ball : MonoBehaviour {
 
     public AudioSource audioSrc;
     public AudioClip bounceSfx;
+    public bool isDestroyed = false;
 
-    private bool isDestroyed = false;
     private int lives = 4;
 
 
     /* --------------------------------- Methods -------------------------------- */
-    void OnMouseOver() {
-        if (!isDestroyed) {
-
-            // Destory ball
-            DestroyBall();
-
-            if (GameManager.GAME_STATUS) {
-                
-                // Increment the balls destroyed counter
-                CalculateScore();
-
-                // Debug the number of destroyed balls in the console
-                Debug.Log($"Score: {GameManager.SCORE}");
-            }
-        }
-    }
-
-
     void OnCollisionEnter(Collision collision) {
         // Check if ball collides with floor
         if (collision.gameObject.tag == "Floor") {
@@ -79,24 +62,24 @@ public class Ball : MonoBehaviour {
         }
     }
 
-    void PlayParticleAndDestroy(GameObject explosionPrefab) {
-        if (explosionPrefab != null)
+    void PlayParticleAndDestroy(GameObject particlePrefab) {
+        if (particlePrefab != null)
         {
             // Instantiate the particle system
-            GameObject explosionParticle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            GameObject particle = Instantiate(particlePrefab, transform.position, Quaternion.identity);
 
             // Get the particle system component
-            ParticleSystem particleSystem = explosionParticle.GetComponent<ParticleSystem>();
+            ParticleSystem particleSystem = particle.GetComponent<ParticleSystem>();
 
             // Get the duration of the particle system
             float particleDuration = particleSystem.main.duration;
 
             // Destroy the particle object after the duration of the particle system
-            Destroy(explosionParticle, particleDuration);
+            Destroy(particle, particleDuration);
         }
     }
 
-    void CalculateScore() {
+    public void CalculateScore() {
         if (lives > 2) { GameManager.SCORE += 1; }
         else if (lives == 2) { GameManager.SCORE += 2; }
         else if (lives <= 1) { GameManager.SCORE += 4; }
