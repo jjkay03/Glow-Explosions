@@ -29,17 +29,25 @@ public class GameManager : MonoBehaviour {
             gameEnded = true;
             EndGame();
         }
+
+        // Check for game restart
+        if (!GAME_STATUS && Input.GetMouseButtonDown(0)) {
+            Debug.Log("GAME RESTART");
+            ResetGame();
+        }
     }
 
     void ResetGame() {
         Debug.Log("GAME START");
 
-        // Change camera background to light blue
-        mainCamera.backgroundColor = startingBgColor;
-
         // Reset score and game status
         GAME_STATUS = true;
         SCORE = 0;
+
+        // Change camera background to light blue
+        mainCamera.backgroundColor = startingBgColor;
+
+        
     }
 
     void EndGame(){
