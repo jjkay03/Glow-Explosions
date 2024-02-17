@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
     
     /* -------------------------------- Variables ------------------------------- */
     public static bool GAME_STATUS = true;
-    public static int BALLS_DESTROYED = 0;
+    public static int SCORE = 0;
 
     bool gameEnded = false;
 

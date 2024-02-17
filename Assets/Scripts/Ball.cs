@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour {
     public GameObject ballExplosion;
     public GameObject yellowBallExplosion;
     public GameObject redBallExplosion;
+    public GameObject gameEdingExplosion;
 
     public Material yellowBallMaterial;
     public Material redBallMaterial;
@@ -25,14 +26,16 @@ public class Ball : MonoBehaviour {
             DestroyBall();
 
             if (GameManager.GAME_STATUS) {
+                
                 // Increment the balls destroyed counter
-                GameManager.BALLS_DESTROYED++;
+                CalculateScore();
 
                 // Debug the number of destroyed balls in the console
-                Debug.Log($"Balls Destroyed: {GameManager.BALLS_DESTROYED}");
-            }   
+                Debug.Log($"Score: {GameManager.SCORE}");
+            }
         }
     }
+
 
     void OnCollisionEnter(Collision collision) {
         // Check if ball collides with floor
@@ -56,6 +59,7 @@ public class Ball : MonoBehaviour {
             }
             else if (lives <= 0) {
                 GameManager.GAME_STATUS = false;
+                PlayParticleAndDestroy(gameEdingExplosion);
                 Debug.Log("Game ending ball hit the floor!");
             }
         }
@@ -90,6 +94,12 @@ public class Ball : MonoBehaviour {
             // Destroy the particle object after the duration of the particle system
             Destroy(explosionParticle, particleDuration);
         }
+    }
+
+    void CalculateScore() {
+        if (lives > 2) { GameManager.SCORE += 1; }
+        else if (lives == 2) { GameManager.SCORE += 2; }
+        else if (lives <= 1) { GameManager.SCORE += 4; }
     }
 
     public void DestroyBall() {
