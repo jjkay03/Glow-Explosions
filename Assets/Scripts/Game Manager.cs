@@ -1,9 +1,11 @@
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
     
     /* -------------------------------- Variables ------------------------------- */
     public Camera mainCamera;
+    [SerializeField] TextMeshProUGUI scoreText;
 
     public static bool GAME_STATUS = true;
     public static int SCORE = 0;
@@ -19,6 +21,9 @@ public class GameManager : MonoBehaviour {
     
     // Update while game is running
     void Update() {
+        // Update score
+        scoreText.text = SCORE.ToString();
+
         // Check for end-game conditions
         if (!GAME_STATUS && !gameEnded) {
             gameEnded = true;
