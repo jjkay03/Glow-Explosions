@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     
     public static bool GAME_STATUS = false;
     public static int SCORE = 0;
+    public static int DIFICULTY = 0;
 
     Color startingBgColor = new Color(0xBB / 255.0f, 0xFF / 255.0f, 0xED / 255.0f, 1.0f);
     bool titleScreen = true;
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour {
         // Update score
         scoreText.text = SCORE.ToString();
 
+        // Update difficulty
+        UpdateDifficulty();
+
         if (titleScreen && Input.GetMouseButtonDown(0)) {
             ResetGame();
             FirstStartGame();  
@@ -41,6 +45,22 @@ public class GameManager : MonoBehaviour {
         // Check for game restart
         if (!GAME_STATUS && Input.GetMouseButtonDown(0)) {
             ResetGame();
+        }
+    }
+
+    void UpdateDifficulty() {
+        int oldDificulty = DIFICULTY;
+
+        // Change dificulty based on score
+        if (SCORE >= 1000) { DIFICULTY = 5; }
+        else if (SCORE >= 500) { DIFICULTY = 4; }
+        else if (SCORE >= 250) { DIFICULTY = 3; }
+        else if (SCORE >= 50) { DIFICULTY = 2; }
+        else if (SCORE >= 15) { DIFICULTY = 1; }
+
+        // Log dificulty changing
+        if (oldDificulty != DIFICULTY) {
+            Debug.Log("[DIFICULTY] Changed diff: " + DIFICULTY);
         }
     }
 
@@ -60,6 +80,7 @@ public class GameManager : MonoBehaviour {
         // Reset score and game status
         GAME_STATUS = true;
         SCORE = 0;
+        DIFICULTY = 0;
         gameEnded = false;
         Spawner.spawnInterval = 2f;
         Spawner.multipleBallAttackCooldown = 10;

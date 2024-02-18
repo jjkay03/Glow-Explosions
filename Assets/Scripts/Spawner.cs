@@ -19,23 +19,16 @@ public class Spawner : MonoBehaviour {
             // Spawn random ball
             SpawnRandomBall(true);
 
-            // Multiple ball attack
-            multipleBallAttackCooldown -= 1;
-            if (Random.Range(0, 4) == 0 && multipleBallAttackCooldown <= 0) {
-                Debug.Log($"[SPAWNER] Multiple ball attack");
-                multipleBallAttackCooldown = 2;
-                for (int i = 0; i < Random.Range(2, 4); i++) {
-                    SpawnRandomBall(false);
-                }
-            }
+            // Multiple balls attack
+            AttackMultipleBalls();
 
             // Cancel the existing InvokeRepeating
             CancelInvoke("ConstentSpawnBall");
 
             // Decrease the spawn interval over time
-            if (Random.Range(0, 10) == 0 && spawnInterval > 0.8f) {
-                    spawnInterval *= 0.95f;
-                    Debug.Log($"[SPAWNER] Spawn interval: {spawnInterval}");
+            if (Random.Range(0, 20) == 0 && spawnInterval > 0.8f) {
+                spawnInterval *= 0.95f;
+                Debug.Log($"[SPAWNER] Spawn interval: {spawnInterval}");
             }  
 
             // Start a new InvokeRepeating with the updated interval
@@ -76,4 +69,34 @@ public class Spawner : MonoBehaviour {
             }
         }
     }   
+
+    void SpawnMultipleBalls(bool hasAngle=false) {
+        Debug.Log($"[SPAWNER] Multiple ball attack");
+        for (int i = 0; i < Random.Range(2, 4); i++) {
+            SpawnRandomBall(hasAngle);
+        }
+    }
+
+    void AttackMultipleBalls() {
+        // Multiple ball attack
+        if (GameManager.DIFICULTY >= 5) {
+            if (Random.Range(0, 3) == 0) { 
+                SpawnMultipleBalls(true); 
+            }
+        } else if (GameManager.DIFICULTY >= 4) {
+            if (Random.Range(0, 4) == 0) { 
+                SpawnMultipleBalls(true); 
+            }
+        } else if (GameManager.DIFICULTY >= 3) {
+            if (Random.Range(0, 4) == 0) { 
+                SpawnMultipleBalls(); 
+            }
+        } else if (GameManager.DIFICULTY > 0) {
+            multipleBallAttackCooldown -= 1;
+            if (Random.Range(0, 4) == 0 && multipleBallAttackCooldown <= 0) { 
+                SpawnMultipleBalls();
+                multipleBallAttackCooldown = 2;
+            }
+        }
+    }
 }
