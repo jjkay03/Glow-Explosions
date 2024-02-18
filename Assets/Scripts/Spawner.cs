@@ -8,11 +8,7 @@ public class Spawner : MonoBehaviour {
     public static float spawnInterval = 2f;
     public static int multipleBallAttackCooldown = 10;
 
-    /* --------------------------------- Methods -------------------------------- */
-    void Start() {
-        ConstentSpawnBall();
-    }
-    
+    /* --------------------------------- Methods -------------------------------- */    
     public void StartSpawner() {
         ConstentSpawnBall();
     }
