@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour {
             CancelInvoke("ConstentSpawnBall");
 
             // Decrease the spawn interval over time
-            if (Random.Range(0, 20) == 0 && spawnInterval > 0.8f) {
+            if (Random.Range(0, 15) == 0 && spawnInterval > 0.8f) {
                 spawnInterval *= 0.95f;
                 Debug.Log($"[SPAWNER] Spawn interval: {spawnInterval}");
             }  
