@@ -3,9 +3,9 @@ using UnityEngine;
 public class Ball : MonoBehaviour {
     
     /* -------------------------------- Variables ------------------------------- */
-    public GameObject ballExplosion;
-    public GameObject yellowBallExplosion;
-    public GameObject redBallExplosion;
+    public GameObject blueBallParticle;
+    public GameObject yellowBallParticle;
+    public GameObject redBallParticle;
     public GameObject gameEdingExplosion;
 
     public Material yellowBallMaterial;
@@ -22,10 +22,6 @@ public class Ball : MonoBehaviour {
     void OnCollisionEnter(Collision collision) {
         // Check if ball collides with floor
         if (collision.gameObject.tag == "Floor") {
-            
-            // Bounce sound effect
-            //audioSrc.PlayOneShot(bounceSfx);
-
             // Decrement lives
             lives--;
             
@@ -44,6 +40,10 @@ public class Ball : MonoBehaviour {
                 Debug.Log("Game ending ball hit the floor!");
             }
         }
+        // Bounce particles and sound
+        BallParticle();
+        //audioSrc.PlayOneShot(bounceSfx);
+
     }
 
     void ChangeMaterial(Material newMaterial) {
@@ -77,6 +77,12 @@ public class Ball : MonoBehaviour {
         }
     }
 
+    void BallParticle() {
+        if (lives > 2) { PlayParticleAndDestroy(blueBallParticle); }
+        else if (lives == 2) { PlayParticleAndDestroy(yellowBallParticle); }
+        else if (lives <= 1) { PlayParticleAndDestroy(redBallParticle); }
+    }
+
     public void CalculateScore() {
         if (lives > 2) { GameManager.SCORE += 1; }
         else if (lives == 2) { GameManager.SCORE += 2; }
@@ -90,9 +96,6 @@ public class Ball : MonoBehaviour {
         Destroy(gameObject);
 
         // Explosion particles
-        if (lives > 2) { PlayParticleAndDestroy(ballExplosion); }
-        else if (lives == 2) { PlayParticleAndDestroy(yellowBallExplosion); }
-        else if (lives <= 1) { PlayParticleAndDestroy(redBallExplosion); }
+        BallParticle();
     }
-
 }

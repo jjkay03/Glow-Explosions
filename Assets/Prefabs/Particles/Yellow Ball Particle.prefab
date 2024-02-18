@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8769507179100605889}
   - component: {fileID: 8484746046851543236}
   m_Layer: 0
-  m_Name: Ball Explosion
+  m_Name: Yellow Ball Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4835,7 +4835,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 14504eb17777ce54388f4c579c4501d7, type: 2}
+  - {fileID: 2100000, guid: e375e87784005f64da7904041b5b2bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

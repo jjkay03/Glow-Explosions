@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour {
     /* --------------------------------- Methods -------------------------------- */
     // Game start
     void Start() {
-        //ResetGame();
+        // Enable title when game start
+        titleText.enabled = true;
     }
     
     // Update while game is running
