@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour {
     
@@ -12,9 +13,12 @@ public class GameManager : MonoBehaviour {
     public static int SCORE = 0;
     public static int DIFICULTY = 0;
 
-    Color startingBgColor = new Color(0xBB / 255.0f, 0xFF / 255.0f, 0xED / 255.0f, 1.0f);
+    Color mainBlueColor = new Color(0xBB / 255.0f, 0xFF / 255.0f, 0xED / 255.0f, 1.0f);
+    Color scoreColor = new Color(22f / 255f, 22f / 255f, 22f / 255f);
+
     bool titleScreen = true;
     bool gameEnded = false;
+    int oldScore = 0;
 
     /* --------------------------------- Methods -------------------------------- */
     // Game start
@@ -26,11 +30,12 @@ public class GameManager : MonoBehaviour {
     // Update while game is running
     void Update() {
         // Update score
-        scoreText.text = SCORE.ToString();
+        UpdateScore();
 
         // Update difficulty
         UpdateDifficulty();
 
+        // Start game for the first time
         if (titleScreen && Input.GetMouseButtonDown(0)) {
             ResetGame();
             FirstStartGame();  
@@ -46,6 +51,25 @@ public class GameManager : MonoBehaviour {
         if (!GAME_STATUS && Input.GetMouseButtonDown(0)) {
             ResetGame();
         }
+    }
+
+    void UpdateScore() {
+        // Check if score changed
+        if (SCORE != oldScore) {
+            // Update score text
+            scoreText.text = SCORE.ToString();
+
+            // Score animation
+            scoreText.color = mainBlueColor;
+            Invoke("ResetScoreText", 0.15f);
+
+            // Update old score for detection for score changing
+            oldScore = SCORE;
+        }
+    }
+
+    void ResetScoreText() {
+        scoreText.color = scoreColor;
     }
 
     void UpdateDifficulty() {
@@ -86,11 +110,14 @@ public class GameManager : MonoBehaviour {
         Spawner.multipleBallAttackCooldown = 10;
 
         // Change camera background to light blue
-        mainCamera.backgroundColor = startingBgColor;
+        mainCamera.backgroundColor = mainBlueColor;
     }
 
     void EndGame(){
         Debug.Log("GAME OVER");
+
+        // Change score color to red
+        scoreText.color = Color.red;
 
         // Change camera background to red
         mainCamera.backgroundColor = Color.red;

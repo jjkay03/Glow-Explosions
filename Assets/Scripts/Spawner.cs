@@ -79,20 +79,23 @@ public class Spawner : MonoBehaviour {
 
     void AttackMultipleBalls() {
         // Multiple ball attack
+        multipleBallAttackCooldown -= 1;
         if (GameManager.DIFICULTY >= 5) {
             if (Random.Range(0, 3) == 0) { 
-                SpawnMultipleBalls(true); 
+                SpawnMultipleBalls(true && multipleBallAttackCooldown <= 0);
+                multipleBallAttackCooldown = 1;
             }
         } else if (GameManager.DIFICULTY >= 4) {
-            if (Random.Range(0, 4) == 0) { 
-                SpawnMultipleBalls(true); 
+            if (Random.Range(0, 4) == 0 && multipleBallAttackCooldown <= 0) { 
+                SpawnMultipleBalls(true);
+                multipleBallAttackCooldown = 2;
             }
         } else if (GameManager.DIFICULTY >= 3) {
-            if (Random.Range(0, 4) == 0) { 
-                SpawnMultipleBalls(); 
+            if (Random.Range(0, 4) == 0 && multipleBallAttackCooldown <= 0) { 
+                SpawnMultipleBalls();
+                multipleBallAttackCooldown = 2;
             }
         } else if (GameManager.DIFICULTY > 0) {
-            multipleBallAttackCooldown -= 1;
             if (Random.Range(0, 4) == 0 && multipleBallAttackCooldown <= 0) { 
                 SpawnMultipleBalls();
                 multipleBallAttackCooldown = 2;
